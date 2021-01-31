@@ -1,0 +1,7 @@
+\section{Inference Engine for Propositional Logic}
+
+Next we wish to use the graph search approach to proving a propositional logic formulated clause given a knowledge base. To conduct the proof, the search algorithm utilizes resolution inference rule to construct a refutation proof. The approach is much similar to a forward chaining algorithm, but creating the new statements through resolution inference based on the previous statements.\footnote{The word 'statement' is used here instead of clause as the forward chaining algorithm introduced in this cause was based on if-rules and not necessarily in clausal normal form (CNF).}
+
+To construct the refutation proof, we negate the initial hypothesis (the hypothesis which we wish to proof is entailed by the knowledge base), and search for a contradiction between the negated hypothesis and the knowledge base.
+
+When searching we know that we have met a contradiction when 

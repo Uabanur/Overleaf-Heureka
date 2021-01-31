@@ -1,0 +1,17 @@
+\subsection{Implementation}
+
+Much like before, we need to extend the base classes from the framework. This time we create the classes \texttt{Clause}, \texttt{KnowledgeBase} and \texttt{RefutationProver}, extending the classes \texttt{State}, \texttt{Problem} and \texttt{GraphSearch}. A second data class \texttt{Literal} is also created, to break up clauses easier. Here the classes contain the following specifications:
+
+\texttt{Literal}: \\
+The literal is the most atomic data type in the data structure. It is composed of an atomic unit and a boolean expressing if it is negated or not. Other methods are \texttt{equals} and \texttt{toString} used for comparisons and overview respectively.
+
+\texttt{Clause}: \\
+The clause is a conjunction of disjunctions of literals. Here the knowledge base is a conjunction of clauses, meaning also a conjunction of disjunctions. To simplify things, we keep the clause as a list of literals, which are interpreted as disjunctions. This way the clause and literal accessibility is straight forward. The only limitation is, that the input to the program is constrained to a list of disjunctions. Based on the 'Clauses' section of the exercise description, and the statement "any clause $L_1$ v $L_2$ v ... v $L_{l+k}$", the clauses consist of a sequence of literals, which here are depicted as disjunctions. 
+
+The \texttt{Clause} class has methods mainly for comparison (independent of literal sorting) and removing duplicate literals.
+
+\texttt{KnowledgeBase}: \\
+Since we don't specify relations between clauses, the \texttt{Action} class is not extended. This means that more work is done during the \texttt{expandState} method. Here the first clause from the list is chosen and combines with each of the other clauses testing for resolution, creating a list of new clauses. The initialization of the frontiers for the \textsc{graph-search} is also quite different, since it is initialized by adding all known clauses (included the negated hypothesis) to the list. The negation of the hypothesis is done by using De Morgan's law for negation of disjunctions, creating a conjunctions of negations, each added to the set of clauses in the knowledge base.
+
+\texttt{ResolutionProver}: \\
+Again, using the framework, the actual algorithm has only small adaptations to make the search algorithm function. No heuristics are used in this example, and the next state is simple the first from the list, similar to the forward chaining algorithm. Testing for goal state is simply by testing that the clause is empty, since this is what constitutes the contradiction.

@@ -1,0 +1,15 @@
+\subsection{Implementation}
+To utilize the framework specified in the previous sections, we need to tailor the graph search to A*, by creating a class \texttt{AStar} extending \texttt{GraphSearch}. To create our data structures we also need to create the classes \texttt{Crossing}, \texttt{Street}, and \texttt{Map} extending \texttt{State}, \texttt{Action} and \texttt{Problem} respectively. Where the extended class contain the following augmentations:
+
+\texttt{Crossing}: \\
+As the parameters $f$, $g$, $h$ are needed for the A* algorithm, for each state, these are added, as well as the coordinates for the crossing. Comparisons between different crossings only evaluates coordinates. Methods called \texttt{getPath} and \texttt{backtrack} are added to calculate the found path using state links.
+
+\texttt{Street}: \\
+As the map is navigated using street names, a label is added to each street. Comparisons use start/end crossings as well as street name.
+
+\texttt{Map}: \\
+The map specifies how to navigate the graph by implementing the methods \texttt{expandState}, \texttt{heuristic}, and \texttt{initializeFrontier}. To expand the current state (crossing) all reachable crossings are found using the available directional streets. Since this is a map search, the heuristics in this case is naturally based on a euclidean distance function. In this scenario, the frontier is initialized by adding the initial state. Additional methods for creating the map, and retrieving map information are implemented, to ease usage.
+
+\texttt{AStar}: \\
+Since the class extends the \texttt{GraphSearch} class, the implementation is quite simple. Only three methods needs to be overwritten. To implement the A* algorithm, the next state chosen from the frontier, should be the state with the lowest $f$ value. The goal state/crossing evaluating uses the crossing comparison together with the specified goal state in the map. Here the link method is essential to finding the shortest path. The implementation links the new crossing the the previous, if it is a new crossing, or if it was previously evaluated with a longer path from the initial state.\footnote{This linkage is much similar to the proposed implementation from week 6 exercises with Thomas Bolander.}
+

@@ -1,0 +1,23 @@
+\subsection{Requirements}
+
+Inspecting the \textsc{graph-search} algorithm specified in the book\cite{ai_text_book} section 3.3, we see that it requires the following elements:
+\begin{itemize}
+    \item \texttt{State}: Vertex in the graph / current system state
+    \item \texttt{Action}: Edge in the graph / possible state transition
+    \item \texttt{Result}: Return value
+    \item \texttt{Problem}: What is intended to be solved
+    \item \texttt{GraphSearch}: The search algorithm
+\end{itemize}
+
+Since the search algorithm described in the book is completely generic, and meant to be highly flexible, several design decisions has to be made in order to translate the elements into usable classes:
+
+\texttt{State} is a data wrapper, meaning the only things we need from it is, access to the content, and a description as how to compare states, an addition to help create usable output the state also has a possible link to another state. 
+
+\texttt{Action} is a relation between states. As we are working with graphs actions are binary (contains two states), and also contains a description as how to compare actions.
+
+\texttt{Result} informs if the search was successful or a failure. As an addition the result value also contains the goal state. This makes it possible for the program to trail the found path using the links specified in the states.
+
+\texttt{Problem} is perhaps the most abstract component from the \textsc{graph-search} algorithm specified in the book. What we need from this element, is the graph itself with states and actions, descriptions as how to navigate the graph, heuristics, the initial state and the goal state. 
+
+\texttt{GraphSearch} contains the search algorithm specified in the book, extended to also be compatible with the A* algorithm, as described in exercises of week 6 of the course. What the element must contain to tailor the search algorithm to any graph search algorithm, is how to choose the next state from the frontiers, an evaluation function if the goal state is found, and a description of how two states are linked.
+

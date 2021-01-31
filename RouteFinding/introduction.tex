@@ -1,0 +1,12 @@
+\section{Route Finding}
+
+For this part of the exercise we intend to implement a graph searching algorithm for route finding on a map. A series of data points are given for the exercise in form of a list of tuples, of size 3, with the needed map information. The tuples are in the form of:
+
+\begin{equation} \label{eq:maptuple}
+    (\text{start location} \star \text{road name} \star \text{end location})
+\end{equation}
+    
+We see that the map is represented by a graph constructed by a series of edges. When constructing the graph, any uncharted location (start or end) constitutes a new vertex. As a map may contain one-way streets, the graph is not bidirectional, which is possible since the tuple information states the direction of the respective edges. A road which is not direction restricted will then be stated as two similar edges but with swapped start/end locations.
+
+Initially the A* and the RBFS algorithms were implemented individually to solve the map search problem. But later only the A* was kept, as this is based on graph search, where RBFS is based on tree search. Since one of the main objectives with this exercise was to re-use modules, it seemed appropriate to go with A* graph search as the map was given as a graph. 
+
